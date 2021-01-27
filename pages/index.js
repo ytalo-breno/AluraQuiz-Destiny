@@ -1,9 +1,14 @@
-import styled from 'styled-components'
-import db from '../db.json'
-import Widget from '../src/components/Widget'
-import Footer from '../src/components/Footer'
-import QuizBackground from '../src/components/QuizBackground'
-import GitHubCorner from '../src/components/GitHubCorner'
+import React from 'react';
+import styled from 'styled-components';
+import Head from 'next/head';
+import {useRouter} from 'next/router';
+
+import db from '../db.json';
+import Widget from '../src/components/Widget';
+import Footer from '../src/components/Footer';
+import QuizBackground from '../src/components/QuizBackground';
+import GitHubCorner from '../src/components/GitHubCorner';
+
 
 /* const BackgroundImage = styled.div`
 background-image: url(${db.bg});
@@ -26,25 +31,53 @@ margin: auto 10%;
 
 
 export default function Home() {
+  const router = useRouter();
+  console.log('submissao react');
+  const [name,setName] = React.useState('');
   return(
-    <QuizBackground backgroundImage={db.bg}> 
+
+  
+    <QuizBackground backgroundImage={db.bg}>
+      <Head>
+        <title>Destiny Quiz</title>
+        </Head> 
       <QuizContainer>
         <Widget>
-          <h1>
+          <Widget.Header>
             O mundo de Destiny
-          </h1>
-          <p>
-            ad astra.....
-          </p>
+          </Widget.Header>
+          <Widget.Content>
+            <form onSubmit={function(event){
+              event.preventDefault();
+
+
+              router.push(`/quiz?name=${name}`)
+          
+          
+    }}>
+            
+            <input 
+            onChange={function(){
+              setName(event.target.value)
+              console.log(event.target.value);
+            }}
+            placeholder="Insira seu nome, guardião"/>
+
+            <Widget.Button type= 'submit'disabled={name.length===0}>
+              Jogar
+            </Widget.Button>
+            </form>
+          </Widget.Content>
+          
         </Widget>
 
         <Widget>
-        <h1>
+        <Widget.Header>
           Quizes da Comunidade
-        </h1>
-        <p>
+        </Widget.Header>
+        <Widget.Content>
           vou ver e te aviso
-        </p>
+        </Widget.Content>
         </Widget>
 
         <Footer/>
