@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const Widget = styled.div`
@@ -48,8 +49,6 @@ Widget.Content = styled.div`
   }
 `;
 
-Widget.Button = styled.button`
-background-color: purple;
-`;
+
 
 export default Widget;
